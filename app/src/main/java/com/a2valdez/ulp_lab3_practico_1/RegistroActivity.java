@@ -20,8 +20,6 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityRegistroBinding binding = ActivityRegistroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Intent intent = getIntent();
-        //Usuario u = (Usuario)intent.getParcelableExtra("usuario");
         mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(RegistroActivityViewModel.class);
         mv.getMUsuario().observe(this, new Observer<Usuario>() {
             @Override
@@ -35,7 +33,11 @@ public class RegistroActivity extends AppCompatActivity {
                 }
             }
         });
-        mv.LeerUsuario();
+        Intent intent = getIntent();
+        int i = (int)intent.getIntExtra("flag", 0);
+        if( i == 1){
+            mv.LeerUsuario();
+        }
         binding.btGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
