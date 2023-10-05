@@ -28,10 +28,12 @@ public class RegistroActivityViewModel extends AndroidViewModel {
         return mUsuario;
     }
 
-    public void LeerUsuario(){
-        Usuario u = ApiClient.leer(context);
-        if( u != null) {
-            mUsuario.setValue(u);
+    public void LeerUsuario(int flag){
+        if( flag == 1) {
+            Usuario u = ApiClient.leer(context);
+            if (u != null) {
+                mUsuario.setValue(u);
+            }
         }
     }
 

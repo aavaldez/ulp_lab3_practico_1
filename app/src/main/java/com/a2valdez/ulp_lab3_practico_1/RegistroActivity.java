@@ -12,9 +12,7 @@ import com.a2valdez.ulp_lab3_practico_1.databinding.ActivityRegistroBinding;
 import com.a2valdez.ulp_lab3_practico_1.model.Usuario;
 
 public class RegistroActivity extends AppCompatActivity {
-
     private RegistroActivityViewModel mv;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,20 +22,16 @@ public class RegistroActivity extends AppCompatActivity {
         mv.getMUsuario().observe(this, new Observer<Usuario>() {
             @Override
             public void onChanged(Usuario usuario) {
-                if (usuario != null){
-                    binding.etDni.setText(String.valueOf(usuario.getDni()));
-                    binding.etApellido.setText(usuario.getApellido());
-                    binding.etNombre.setText(usuario.getNombre());
-                    binding.etMail.setText(usuario.getMail());
-                    binding.etPassword.setText(usuario.getPassword());
-                }
+                binding.etDni.setText(String.valueOf(usuario.getDni()));
+                binding.etApellido.setText(usuario.getApellido());
+                binding.etNombre.setText(usuario.getNombre());
+                binding.etMail.setText(usuario.getMail());
+                binding.etPassword.setText(usuario.getPassword());
             }
         });
         Intent intent = getIntent();
         int i = (int)intent.getIntExtra("flag", 0);
-        if( i == 1){
-            mv.LeerUsuario();
-        }
+        mv.LeerUsuario(i);
         binding.btGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
